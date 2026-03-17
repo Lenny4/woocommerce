@@ -113,8 +113,8 @@ class FulfillmentsSettings {
 		 *
 		 * @since 10.1.0
 		 *
-		 * @param array $auto_fulfill_items List of product or variant ID's to auto-fulfill.
-		 * @param \WC_Order $order The order object.
+		 * @param array                      $auto_fulfill_items List of product or variant ID's to auto-fulfill.
+		 * @param \WC_Order|\WC_Order_Refund $order              The order object.
 		 *
 		 * @return array Filtered list of product or variant ID's to auto-fulfill
 		 */
@@ -159,7 +159,7 @@ class FulfillmentsSettings {
 			$fulfillment->save();
 		}
 
-		$order->update_meta_data( '_auto_fulfill_processed', true );
+		$order->update_meta_data( '_auto_fulfill_processed', '1' );
 	}
 
 	/**
