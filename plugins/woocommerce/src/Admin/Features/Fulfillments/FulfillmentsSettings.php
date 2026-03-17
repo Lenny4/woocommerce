@@ -95,14 +95,13 @@ class FulfillmentsSettings {
 	/**
 	 * Automatically fulfill items in the order on the processing state.
 	 *
-	 * @param int           $order_id The ID of the order being created.
-	 * @param WC_Order|null $order    The order object.
+	 * @param int      $order_id The ID of the order being created.
+	 * @param WC_Order $order The order object.
 	 */
 	public function auto_fulfill_items_on_processing( int $order_id, $order ): void {
 		$order = $order instanceof WC_Order ? $order : wc_get_order( $order_id );
 
-		$order_items = $order ? $order->get_items() : array();
-		if ( ! $order || empty( $order_items ) ) {
+		if ( ! $order || empty( $order->get_items() ) ) {
 			return;
 		}
 		$auto_fulfill_downloadable = 'yes' === get_option( 'auto_fulfill_downloadable', 'yes' );
@@ -113,15 +112,15 @@ class FulfillmentsSettings {
 		 *
 		 * @since 10.1.0
 		 *
-		 * @param array                      $auto_fulfill_items List of product or variant ID's to auto-fulfill.
-		 * @param \WC_Order|\WC_Order_Refund $order              The order object.
+		 * @param array $auto_fulfill_items List of product or variant ID's to auto-fulfill.
+		 * @param \WC_Order $order The order object.
 		 *
 		 * @return array Filtered list of product or variant ID's to auto-fulfill
 		 */
 		$auto_fulfill_product_ids = apply_filters( 'woocommerce_fulfillments_auto_fulfill_products', array(), $order );
 		$auto_fulfill_items       = array();
 
-		foreach ( $order_items as $item ) {
+		foreach ( $order->get_items() as $item ) {
 			/**
 			 * Get the product associated with the item.
 			 *
@@ -159,7 +158,7 @@ class FulfillmentsSettings {
 			$fulfillment->save();
 		}
 
-		$order->update_meta_data( '_auto_fulfill_processed', '1' );
+		$order->update_meta_data( '_auto_fulfill_processed', true );
 	}
 
 	/**
