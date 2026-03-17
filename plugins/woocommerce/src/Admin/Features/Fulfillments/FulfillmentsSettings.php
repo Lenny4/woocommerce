@@ -100,7 +100,7 @@ class FulfillmentsSettings {
 	 */
 	public function auto_fulfill_items_on_processing( int $order_id, $order ): void {
 		$order = $order instanceof WC_Order ? $order : wc_get_order( $order_id );
-		/** @var false|\WC_Order $order */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+		/** @var WC_Order|false $order */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
 
 		$order_items = $order ? $order->get_items() : array();
 		if ( empty( $order_items ) ) {
