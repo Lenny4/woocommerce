@@ -101,7 +101,8 @@ class FulfillmentsSettings {
 	public function auto_fulfill_items_on_processing( int $order_id, $order ): void {
 		$order = $order instanceof WC_Order ? $order : wc_get_order( $order_id );
 
-		if ( ! $order || empty( $order->get_items() ) ) {
+		$order_items = $order ? $order->get_items() : array();
+		if ( empty( $order_items ) ) {
 			return;
 		}
 		$auto_fulfill_downloadable = 'yes' === get_option( 'auto_fulfill_downloadable', 'yes' );
@@ -120,7 +121,7 @@ class FulfillmentsSettings {
 		$auto_fulfill_product_ids = apply_filters( 'woocommerce_fulfillments_auto_fulfill_products', array(), $order );
 		$auto_fulfill_items       = array();
 
-		foreach ( $order->get_items() as $item ) {
+		foreach ( $order_items as $item ) {
 			/**
 			 * Get the product associated with the item.
 			 *
