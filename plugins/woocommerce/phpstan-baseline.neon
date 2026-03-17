@@ -46878,7 +46878,7 @@ parameters:
 		-
 			message: '#^Negated boolean expression is always false\.$#'
 			identifier: booleanNot.alwaysFalse
-			count: 2
+			count: 1
 			path: src/Admin/Features/Fulfillments/FulfillmentsSettings.php
 
 		-
