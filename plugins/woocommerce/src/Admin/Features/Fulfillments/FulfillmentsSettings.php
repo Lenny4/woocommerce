@@ -102,7 +102,7 @@ class FulfillmentsSettings {
 		$order = $order instanceof WC_Order ? $order : wc_get_order( $order_id );
 
 		$order_items = $order ? $order->get_items() : array();
-		if ( empty( $order_items ) ) {
+		if ( ! $order || empty( $order_items ) ) {
 			return;
 		}
 		$auto_fulfill_downloadable = 'yes' === get_option( 'auto_fulfill_downloadable', 'yes' );

@@ -46882,12 +46882,6 @@ parameters:
 			path: src/Admin/Features/Fulfillments/FulfillmentsSettings.php
 
 		-
-			message: '#^Parameter \#2 \$value of method WC_Data\:\:update_meta_data\(\) expects array\|string, true given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Admin/Features/Fulfillments/FulfillmentsSettings.php
-
-		-
 			message: '#^Cannot call method get_customer_id\(\) on WC_Order\|WC_Order_Refund\|null\.$#'
 			identifier: method.nonObject
 			count: 1
