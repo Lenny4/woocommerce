@@ -95,12 +95,11 @@ class FulfillmentsSettings {
 	/**
 	 * Automatically fulfill items in the order on the processing state.
 	 *
-	 * @param int      $order_id The ID of the order being created.
-	 * @param WC_Order $order The order object.
+	 * @param int           $order_id The ID of the order being created.
+	 * @param WC_Order|null $order    The order object.
 	 */
 	public function auto_fulfill_items_on_processing( int $order_id, $order ): void {
 		$order = $order instanceof WC_Order ? $order : wc_get_order( $order_id );
-		/** @var WC_Order|false $order */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
 
 		$order_items = $order ? $order->get_items() : array();
 		if ( empty( $order_items ) ) {
